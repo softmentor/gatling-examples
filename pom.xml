@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.gatling</groupId>
+	<artifactId>gatling-parent-demo</artifactId>
+    <version>2.0.0-M3a</version>
+	<packaging>pom</packaging>
+	<inceptionYear>2011</inceptionYear>
+	<modules>
+		<module>gatling-custom-protocol-demo</module>
+	</modules>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:excilys/gatling.git</connection>
+		<developerConnection>scm:git:git@github.com:excilys/gatling.git</developerConnection>
+		<url>https://github.com/excilys/gatling</url>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>excilys-release</id>
+			<url>http://repository.excilys.com/content/repositories/releases</url>
+		</repository>
+	</distributionManagement>
+	
+</project>
