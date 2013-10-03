@@ -14,6 +14,7 @@ import akka.actor.ActorRef;
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.action.{Chainable, system}
 import bootstrap._
+import assertions._
 import akka.actor.Props
 import io.gatling.core.result.message.{RequestMessage, KO, OK}
 import io.gatling.core.result.writer.DataWriter
@@ -30,6 +31,9 @@ class TestCustomProtocolSimulation extends Simulation {
                }
 
   setUp(scn.inject(ramp(3 users) over (10 seconds)))
+  assertThat(   
+    global.responseTime.max.lessThan(50),
+    global.successfulRequest.percent.greaterThan(95))
 }
 
 
