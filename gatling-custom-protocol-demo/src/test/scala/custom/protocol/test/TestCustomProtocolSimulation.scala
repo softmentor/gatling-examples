@@ -51,9 +51,9 @@ class MyAction(val next: ActorRef) extends Chainable {
     var status: Status = OK
     var errorMessage: Option[String] = None
     try {
-      start = System.currentTimeMillis / 1000;
+      start = System.currentTimeMillis;
       greet() // Call any custom code you wish, say an API call
-      end = System.currentTimeMillis / 1000;
+      end = System.currentTimeMillis;
     } catch {
       case e: Exception =>
         errorMessage = Some(e.getMessage)
