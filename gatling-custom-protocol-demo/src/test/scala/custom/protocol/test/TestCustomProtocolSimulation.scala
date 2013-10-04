@@ -30,10 +30,9 @@ class TestCustomProtocolSimulation extends Simulation {
                  exec(mine)
                }
 
-  setUp(scn.inject(ramp(3 users) over (10 seconds)))
-  assertThat(   
-    global.responseTime.max.lessThan(50),
-    global.successfulRequest.percent.greaterThan(95))
+  setUp(scn.inject(ramp(3 users) over (10 seconds))
+      //Assert the output max time is less than 50ms and 95% of requests were successful
+      .assertions(global.responseTime.max.lessThan(50),global.successfulRequest.percent.greaterThan(95))
 }
 
 
