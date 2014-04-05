@@ -19,13 +19,16 @@ import akka.actor.Props
 import io.gatling.core.result.message.{RequestMessage, KO, OK}
 import io.gatling.core.result.writer.DataWriter
 import com.custom._
+import scalaj.collection.Imports._
 
 class TestCustomProtocolSimulation extends Simulation {
 
   val mine = new ActionBuilder {
     def build(next: ActorRef) = system.actorOf(Props(new MyAction(next)))
   }
+  val userLog = csv("user_credentials.csv").queue
   val scn = scenario("My custom protocol test")
+    .feed(userLog)
     .repeat(2) {
                  exec(mine)
                }
@@ -39,9 +42,13 @@ class TestCustomProtocolSimulation extends Simulation {
 class MyAction(val next: ActorRef) extends Chainable {
 
 
-  def greet() {
+  def greet(session: Session) {
+    //val username = session.attributes.apply("username")
+    //val password = session.attributes("password") // need not call apply it is implicit
+
     val delegate = new SayHello
-    delegate.echo("Hi")
+    //using scalaj to convert from scala map to java map
+    delegate.echo("Hi", session.attributes.asJava)
   }
 
   def execute(session: Session) {
@@ -49,9 +56,10 @@ class MyAction(val next: ActorRef) extends Chainable {
     var end: Long = 0L
     var status: Status = OK
     var errorMessage: Option[String] = None
+
     try {
       start = System.currentTimeMillis;
-      greet() // Call any custom code you wish, say an API call
+      greet(session) // Call any custom code you wish, say an API call
       end = System.currentTimeMillis;
     } catch {
       case e: Exception =>
