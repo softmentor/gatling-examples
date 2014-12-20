@@ -4,9 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.gatling</groupId>
 	<artifactId>gatling-parent-demo</artifactId>
-    <version>2.0.0-M3a</version>
+    <version>2.1.1</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2011</inceptionYear>
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <encoding>UTF-8</encoding>
+        <gatling.version>2.1.1</gatling.version>
+        <gatling.io.version>2.1.1</gatling.io.version>
+        <scala.version>2.11.4</scala.version>
+        <scala-maven-plugin.version>3.2.0</scala-maven-plugin.version>
+    </properties>
+
 	<modules>
 		<module>gatling-custom-protocol-demo</module>
 	</modules>
@@ -25,11 +36,71 @@
 		<url>https://github.com/excilys/gatling</url>
 	</scm>
 
-	<distributionManagement>
+	<!--<distributionManagement>
 		<repository>
 			<id>excilys-release</id>
 			<url>http://repository.excilys.com/content/repositories/releases</url>
 		</repository>
-	</distributionManagement>
-	
+	</distributionManagement>-->
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-app</artifactId>
+                <version>${gatling.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-recorder</artifactId>
+                <version>${gatling.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.gatling.highcharts</groupId>
+                <artifactId>gatling-charts-highcharts</artifactId>
+                <version>${gatling.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>${scala-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <args>
+                                <arg>-target:jvm-1.7</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

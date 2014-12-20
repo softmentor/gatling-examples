@@ -6,14 +6,14 @@
     <parent>
         <groupId>io.gatling</groupId>
         <artifactId>gatling-parent-demo</artifactId>
-        <version>2.0.0-M3a</version>
+        <version>2.1.1</version>
     </parent>
 
     <groupId>io.gatling</groupId>
     <artifactId>gatling-custom-protocol-demo</artifactId>
     <packaging>jar</packaging>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>excilys</id>
             <name>Excilys Repository</name>
@@ -27,12 +27,12 @@
             <name>Excilys Repository</name>
             <url>http://repository.excilys.com/content/groups/public</url>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gatling.io.version>2.0.0-M3a</gatling.io.version>
-        <scala.version>2.10</scala.version>
+        <gatling.io.version>2.1.1</gatling.io.version>
+        <scala.version>2.11.4</scala.version>
     </properties>
 
     <dependencies>
@@ -50,10 +50,16 @@
         </dependency>
 
         <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+        </dependency>
+
+        <!--Was required for converting scala collections to java, not required as it is supported in scala 2.11.x-->
+        <!--<dependency>
             <groupId>org.scalaj</groupId>
             <artifactId>scalaj-collection_${scala.version}</artifactId>
             <version>1.5</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -69,20 +75,27 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <!-- Default values -->
-                            <configDir>src/test/resources</configDir>
+                            <configFolder>src/test/resources</configFolder>
                             <dataFolder>src/test/resources/data</dataFolder>
                             <resultsFolder>target/gatling/results</resultsFolder>
-                            <requestBodiesFolder>src/test/resources/request-bodies
-                            </requestBodiesFolder>
+                            <bodiesFolder>src/test/resources/request-bodies</bodiesFolder>
                             <simulationsFolder>src/test/scala</simulationsFolder>
-                            <includes>
+                            <!--<includes>
                                 <include>**/*.scala</include>
-                            </includes>
+                            </includes>-->
                             <!--<excludes>-->
-                                <!--<exclude>advanced/*.scala</exclude>-->
-                                <!--<exclude>basic/*.scala</exclude>-->
+                            <!--<exclude>advanced/*.scala</exclude>-->
+                            <!--<exclude>basic/*.scala</exclude>-->
                             <!--</excludes>-->
+                            <!--    <noReports>false</noReports> -->
+                            <!--   <reportsOnly>directoryName</reportsOnly> -->
+                            <!--   <simulationClass>foo.Bar</simulationClass> -->
+                            <!--   <jvmArgs> -->
+                            <!--     <jvmArg>-DmyExtraParam=foo</jvmArg> -->
+                            <!--   </jvmArgs> -->
+                            <!--    <fork>true</fork> -->
+                            <!--    <propagateSystemProperties>true</propagateSystemProperties> -->
+                            <!--   <failOnError>true</failOnError> -->
                         </configuration>
                     </execution>
                 </executions>
