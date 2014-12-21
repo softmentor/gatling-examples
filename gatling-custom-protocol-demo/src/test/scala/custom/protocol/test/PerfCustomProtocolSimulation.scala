@@ -24,7 +24,7 @@ import scala.concurrent.duration._
 
 import scala.collection.convert.wrapAsJava
 
-class TestCustomProtocolSimulation extends Simulation {
+class PerfCustomProtocolSimulation extends Simulation {
 
   val mine = new ActionBuilder {
     def build(next: ActorRef, protocols: Protocols) = {
