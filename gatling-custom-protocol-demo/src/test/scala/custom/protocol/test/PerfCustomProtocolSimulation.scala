@@ -46,13 +46,13 @@ class PerfCustomProtocolSimulation extends Simulation {
     scn.inject(
       nothingFor(4 seconds), // 1
       atOnceUsers(10), // 2
-      rampUsers(3) over (5 seconds), // 3
-      constantUsersPerSec(5) during (5 seconds), // 4
-      constantUsersPerSec(5) during (5 seconds) randomized, // 5
-      rampUsersPerSec(10) to 20 during (1 minutes), // 6
-      rampUsersPerSec(10) to 20 during (1 minutes) randomized, // 7
-      splitUsers(10) into (rampUsers(2) over (10 seconds)) separatedBy (2 seconds), // 8
-      splitUsers(10) into (rampUsers(2) over (10 seconds)) separatedBy atOnceUsers(5), // 9
+      rampUsers(3) over (2 seconds), // 3
+      constantUsersPerSec(5) during (2 seconds), // 4
+      constantUsersPerSec(5) during (2 seconds) randomized, // 5
+      rampUsersPerSec(10) to 20 during (3 seconds), // 6
+      rampUsersPerSec(10) to 20 during (2 seconds) randomized, // 7
+      splitUsers(10) into (rampUsers(2) over (5 seconds)) separatedBy (2 seconds), // 8
+      splitUsers(10) into (rampUsers(2) over (5 seconds)) separatedBy atOnceUsers(5), // 9
       heavisideUsers(10) over (500 milliseconds) // 10
     )
     //Assert the output max time is less than 50ms and 95% of requests were successful
